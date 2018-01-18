@@ -1,3 +1,4 @@
+group 'com.epam.trainings.jl'
 version '1.0-SNAPSHOT'
 
 apply plugin: 'java'
@@ -8,6 +9,67 @@ repositories {
     mavenCentral()
 }
 
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath 'org.junit.platform:junit-platform-gradle-plugin:+'
+    }
+}
+
+apply plugin: 'org.junit.platform.gradle.plugin'
+
+junitPlatform {
+    logManager 'org.apache.logging.log4j.jul.LogManager'
+}
+
+configurations {
+    testCompile.extendsFrom compileOnly
+}
+
 dependencies {
-    testCompile group: 'junit', name: 'junit', version: '4.12'
+    compile 'org.apache.logging.log4j:log4j-jul:+',
+            'org.apache.logging.log4j:log4j-core:+',
+
+            // Spring Core (IoC)
+            'org.springframework:spring-context:+',
+
+            // AOP
+            'org.aspectj:aspectjrt:+',
+            'aopalliance:aopalliance:+',
+            'org.aspectj:aspectjweaver:+',
+
+            // JDBC (+C3P0)
+            'org.springframework:spring-jdbc:+',
+            'com.mchange:c3p0:+',
+
+            // ORM
+            'org.springframework:spring-orm:+',
+            'org.hibernate:hibernate-spatial:+',
+            'org.hibernate:hibernate-validator:+',
+            'org.hibernate:hibernate-java8:+',
+            'org.hibernate.javax.persistence:hibernate-jpa-2.1-api:+'
+
+    'io.vavr:vavr:+'
+
+    // H2
+    testRuntime 'com.h2database:h2:+'
+
+    compileOnly 'org.projectlombok:lombok:+',
+            'edu.washington.cs.types.checker:checker-framework:+'
+
+    testCompile 'org.junit.jupiter:junit-jupiter-api:+',
+            'org.junit.jupiter:junit-jupiter-engine:+',
+            'org.junit.jupiter:junit-jupiter-params:5.0.2',
+            'org.hamcrest:java-hamcrest:+',
+            'org.springframework:spring-test:+',
+            'org.mockito:mockito-core:+'
+}
+
+// type in terminal: gradle wrapper --gradle-version=4.5-rc-1
+task Wrapper(type: Wrapper) {
+    description = 'Generates gradlew[.bat] scripts'
+    gradleVersion = '4.5-rc-1'
+    distributionUrl = "https://services.gradle.org/distributions/gradle-$gradleVersion-all.zip"
 }
