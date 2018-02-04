@@ -37,8 +37,8 @@ dependencies {
 
             // AOP
             'org.aspectj:aspectjrt:+',
-            'aopalliance:aopalliance:+',
             'org.aspectj:aspectjweaver:+',
+            'aopalliance:aopalliance:+',
 
             // JDBC (+C3P0)
             'org.springframework:spring-jdbc:+',

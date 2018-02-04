@@ -1,7 +1,5 @@
-package spring;
+package spring.model;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
 import lombok.Value;
 
 import java.util.List;
@@ -11,6 +9,7 @@ public class SimplePerson implements Person {
     private String firstName;
     private String lastName;
     private boolean isProgrammer;
+    private boolean isBroke;
     private Country country;
     private List<Contact> contacts;
 

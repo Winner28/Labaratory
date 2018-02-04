@@ -1,4 +1,4 @@
-package spring;
+package spring.model;
 
 public interface  Person {
     String getFirstName();
@@ -10,4 +10,11 @@ public interface  Person {
     boolean isProgrammer();
 
     java.util.List<Contact> getContacts();
+
+    default String getName() {
+        return getFirstName() + " " + getLastName();
+    }
+
+    boolean isBroke();
+
 }
