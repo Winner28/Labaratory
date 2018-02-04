@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:util="http://www.springframework.org/schema/util" xmlns:c="http://www.springframework.org/schema/c"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+
+    <context:annotation-config/>
+    <context:component-scan base-package="spring"/>
+
+    <bean id="country" class="spring.SimpleCountry">
+        <constructor-arg name="name" value="Belarus"/>
+        <constructor-arg name="codeName" value="BY"/>
+    </bean>
+
+    <util:list id="contacts" value-type="spring.SimpleContact">
+    <ref bean="contact"/>
+    </util:list>
+
+
+    <bean id="person" class="spring.SimplePerson">
+        <constructor-arg name="firstName" value="Makar"/>
+        <constructor-arg name="lastName" value="Fedor"/>
+        <constructor-arg name="isProgrammer" value="true"/>
+        <constructor-arg name="country" ref="country"/>
+        <constructor-arg name="contacts" ref="contacts"/>
+    </bean>
+
+    <bean class="spring.SimpleContact" id="contact">
+        <constructor-arg name="email" value="@epam.com"/>
+        <constructor-arg name="number" value="3223222"/>
+    </bean>
+
+</beans>
