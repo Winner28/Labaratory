@@ -9,29 +9,38 @@
     <context:annotation-config/>
     <context:component-scan base-package="spring"/>
 
-    <bean id="country" class="spring.model.SimpleCountry">
+    <bean id="country" class="spring.model.ioc.SimpleCountry">
         <constructor-arg name="name" value="Belarus"/>
         <constructor-arg name="codeName" value="BY"/>
     </bean>
 
-    <util:list id="contacts" value-type="spring.model.SimpleContact">
+    <util:list id="contacts" value-type="spring.model.ioc.SimpleContact">
     <ref bean="contact"/>
     </util:list>
 
 
 
-    <bean id="person" class="spring.model.SimplePerson">
+    <bean id="person" class="spring.model.ioc.SimplePerson">
+        <constructor-arg name="firstName" value="Makar"/>
+        <constructor-arg name="lastName" value="Fedor"/>
+        <constructor-arg name="isProgrammer" value="true"/>
+        <constructor-arg name="country" ref="country"/>
+        <constructor-arg name="isBroke" value="false"/>
+        <constructor-arg name="contacts" ref="contacts"/>
+    </bean>
+
+    <bean class="spring.model.ioc.SimpleContact" id="contact">
+        <constructor-arg name="email" value="@epam.com"/>
+        <constructor-arg name="number" value="3223222"/>
+    </bean>
+
+    <bean id="aopPerson" class="spring.model.ioc.SimplePerson">
         <constructor-arg name="firstName" value="Makar"/>
         <constructor-arg name="lastName" value="Fedor"/>
         <constructor-arg name="isProgrammer" value="true"/>
         <constructor-arg name="country" ref="country"/>
         <constructor-arg name="isBroke" value="true"/>
         <constructor-arg name="contacts" ref="contacts"/>
-    </bean>
-
-    <bean class="spring.model.SimpleContact" id="contact">
-        <constructor-arg name="email" value="@epam.com"/>
-        <constructor-arg name="number" value="3223222"/>
     </bean>
 
 </beans>

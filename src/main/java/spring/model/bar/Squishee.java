@@ -1,4 +1,4 @@
-package spring.aop;
+package spring.model.bar;
 
 import lombok.Value;
 

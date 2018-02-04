@@ -1,17 +1,18 @@
-package spring.model.Bar;
+package spring.model.bar;
 
-import org.aspectj.lang.annotation.Aspect;
-import spring.aop.Squishee;
-import spring.model.Person;
+import org.springframework.stereotype.Component;
+import spring.aop.AopLog;
+import spring.model.ioc.Person;
 
-@Aspect
+@Component("bar")
 public class ApuBar implements Bar {
+
     @Override
     public Squishee sellSquishee(Person customer) {
         if (customer.isBroke())
             throw new CustomerBrokenException();
 
-        System.out.println("Here is your Squishee \n");
+        AopLog.append("Here is your Squishee \n");
         return new Squishee("Usual Squishee");
     }
 }

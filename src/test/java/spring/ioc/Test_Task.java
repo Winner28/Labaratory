@@ -6,12 +6,12 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
-import spring.model.Contact;
-import spring.model.Country;
-import spring.model.Person;
-import spring.model.SimpleContact;
-import spring.model.SimpleCountry;
-import spring.model.SimplePerson;
+import spring.model.ioc.Contact;
+import spring.model.ioc.Country;
+import spring.model.ioc.Person;
+import spring.model.ioc.SimpleContact;
+import spring.model.ioc.SimpleCountry;
+import spring.model.ioc.SimplePerson;
 
 import java.util.Collections;
 
@@ -46,7 +46,7 @@ public class Test_Task {
         return new SimplePerson("Makar",
                 "Fedor",
                 true,
-                true,
+                false,
                 getExpectedCountry(),
                 Collections.singletonList(getExpectedContact()));
     }

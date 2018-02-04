@@ -1,4 +1,4 @@
-package spring.model;
+package spring.model.ioc;
 
 public interface Contact {
     String getEmail();

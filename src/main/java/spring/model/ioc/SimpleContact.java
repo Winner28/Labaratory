@@ -1,4 +1,4 @@
-package spring.model;
+package spring.model.ioc;
 
 import lombok.Value;
 
