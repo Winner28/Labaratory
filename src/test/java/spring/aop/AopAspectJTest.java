@@ -35,7 +35,6 @@ public class AopAspectJTest {
 
     @Test
     void testBeforeAdvice() {
-     //   System.out.println(AopLog.getStringValue());
         assertTrue("Before advice is not good enought...", AopLog.getStringValue().contains("Hello"));
         assertTrue("Before advice is not good enought...", AopLog.getStringValue().contains("How are you doing?"));
     }
@@ -57,8 +56,9 @@ public class AopAspectJTest {
         System.out.println(AopLog.getStringValue());
     }
 
-    /*@Test
+    @Test
     void testAllAdvices() {
+        System.out.println(AopLog.getStringValue());
         assertFalse(bar instanceof ApuBar, "barObject instanceof ApuBar");
-    }*/
+    }
 }
