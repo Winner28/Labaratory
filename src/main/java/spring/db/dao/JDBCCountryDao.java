@@ -51,19 +51,22 @@ public class JDBCCountryDao extends NamedParameterJdbcDaoSupport implements Coun
 	}
 
 	@Override
-	public Country getCountryByCodeName(String codeName) {
-		return getJdbcTemplate().query(String.format(GET_COUNTRY_BY_CODE_NAME_SQL, codeName),
-                COUNTRY_ROW_MAPPER).get(0);
-	}
+    public Country getCountryByCodeName(String codeName) {
+        JdbcTemplate jdbcTemplate = getJdbcTemplate();
+        String sql = String.format(GET_COUNTRY_BY_CODE_NAME_SQL, codeName);
+        return jdbcTemplate.queryForObject(sql, COUNTRY_ROW_MAPPER);
+    }
 
-	@Override
-	public Country getCountryByName(String name) {
-		JdbcTemplate jdbcTemplate = getJdbcTemplate();
-		List<Country> countryList = jdbcTemplate.query(
-		        String.format(GET_COUNTRIES_BY_NAME_SQL, name), COUNTRY_ROW_MAPPER);
-		if (countryList.isEmpty()) {
-		    throw new CountryNotFoundException("Country list is empty!");
+    @Override
+    public Country getCountryByName(String name)
+            throws CountryNotFoundException {
+        JdbcTemplate jdbcTemplate = getJdbcTemplate();
+        List<Country> countryList = jdbcTemplate.query(
+                String.format(GET_COUNTRY_BY_NAME_SQL,name),
+                COUNTRY_ROW_MAPPER);
+        if (countryList.isEmpty()) {
+            throw new CountryNotFoundException("Country list is epmty!");
         }
         return countryList.get(0);
-	}
+    }
 }

@@ -7,6 +7,8 @@
 
     <jdbc:embedded-database id="dataSource" type="H2">
         <jdbc:script location="db-schema.sql"/>
+        <jdbc:script location="initDB.sql" />
+
     </jdbc:embedded-database>
 
     <bean id="countryDao" class="spring.db.dao.JDBCCountryDao"
