@@ -8,6 +8,7 @@ import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import spring.db.dao.CountryDao;
+import spring.db.dao.CountryNotFoundException;
 import spring.model.ioc.Country;
 import spring.model.ioc.SimpleCountry;
 
@@ -17,10 +18,12 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 @ExtendWith(SpringExtension.class)
 @ContextConfiguration("classpath:jdbc.xml")
@@ -30,9 +33,14 @@ public class JdbcTest {
     private CountryDao countryDao;
 
     private List<Country> expectedCountryList = new ArrayList<>();
-    private List<Country> expectedCountryListStartsWithA = new ArrayList<>();
-    private final String COUNTRY_NAME = "Australia";
-    private final String COUNTRY_CODE_NAME = "AU";
+    private static final String COUNTRY_NAME = "Australia";
+    private static final String COUNTRY_CODE_NAME = "AU";
+    private static final String NEW_COUNTRY_CODE_NAME = "AUS";
+    private static final String SECOND_COUNTRY_NAME = "Argentine";
+    private static final String BEST_COUNTRY_NAME = "Belarus";
+    private static final String BEST_COUNTRY_CODE_NAME = "BY";
+
+
     private Country countryWithChangedName = new SimpleCountry(8, "Russia", "RU");
 
     @BeforeEach
@@ -44,31 +52,54 @@ public class JdbcTest {
     @DirtiesContext
     void testThatExpectedCountriesAreNotEmpty() {
         assertFalse(expectedCountryList.isEmpty());
-        assertFalse(expectedCountryListStartsWithA.isEmpty());
     }
 
     @Test
     @DirtiesContext
     void testThatWeCanGetExpectedCountryByName() {
-        Country country = countryDao.getCountryByName(COUNTRY_NAME);
+        Country country = countryDao.getCountryByName(BEST_COUNTRY_NAME);
         assertEquals(country, getCountry());
     }
 
-    private void initExpectedCountryList() {
-        for (int i = 0; i < CountryDao.COUNTRY_INIT_DATA.length; i++) {
-            String[] countryInitData = CountryDao.COUNTRY_INIT_DATA[i++];
-            Country country = new SimpleCountry(i, countryInitData[0], countryInitData[1]);
-            expectedCountryList.add(country);
-            if (country.getName().startsWith("A")) {
-                expectedCountryListStartsWithA.add(country);
-            }
-        }
+    @Test
+    @DirtiesContext
+    void testThatWeCanGetExpectedCountryByCodeName() {
+        Country country = countryDao.getCountryByCodeName(BEST_COUNTRY_CODE_NAME);
+        assertEquals(country, getCountry());
     }
 
+    @Test
+    @DirtiesContext
+    void testThatWeCanUpdateCountryName() {
+        Country beforeUpdate = countryDao.getCountryByName(COUNTRY_NAME);
+        countryDao.updateCountryCodeName(COUNTRY_CODE_NAME, NEW_COUNTRY_CODE_NAME);
+        Country afterUpdate = countryDao.getCountryByName(COUNTRY_NAME);
+        assertNotEquals(beforeUpdate, afterUpdate);
+    }
+
+    @Test
+    @DirtiesContext
+    void testThatWeCanDeleteCountryByCountryName() {
+        int countrySizeBeforeDelete = expectedCountryList.size();
+        countryDao.deleteCountryByName(COUNTRY_NAME);
+        int countrySizeAfterDelete = countryDao.getCountryList().size();
+        assertThat(countrySizeBeforeDelete, greaterThan(countrySizeAfterDelete));
+    }
+
+    @Test
+    @DirtiesContext
+    void testExpectionThrowsAfterTryingToGetDeletedCountry() {
+        countryDao.deleteCountryByName(SECOND_COUNTRY_NAME);
+        assertThrows(CountryNotFoundException.class, () -> countryDao.getCountryByName(SECOND_COUNTRY_NAME));
+    }
+
+    private void initExpectedCountryList() {
+        expectedCountryList = countryDao.getCountryList();
+    }
 
     private Country getCountry() {
-        return new SimpleCountry(1,
-                COUNTRY_NAME,
-                COUNTRY_CODE_NAME);
+        return new SimpleCountry(2,
+                BEST_COUNTRY_NAME,
+                BEST_COUNTRY_CODE_NAME);
     }
 }

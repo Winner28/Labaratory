@@ -31,14 +31,13 @@ public class JDBCCountryDao extends NamedParameterJdbcDaoSupport implements Coun
 
 	@Override
 	public List<Country> getCountryListStartWith(String name) {
-		return getNamedParameterJdbcTemplate().query(GET_COUNTRY_BY_NAME_SQL, new MapSqlParameterSource("name",
-				name + "%" ), COUNTRY_ROW_MAPPER);
+		return getJdbcTemplate().query(String.format(GET_COUNTRY_BY_NAME_SQL, name), COUNTRY_ROW_MAPPER);
 	}
 
 	@Override
-	public void updateCountryName(String codename, String newCountryCodeName) {
+	public void updateCountryCodeName(String codename, String newCountryCodeName) {
 	    getJdbcTemplate().execute(
-	            String.format(UPDATE_COUNTRY_NAME_SQL, newCountryCodeName, codename));
+	            String.format(UPDATE_COUNTRY_CODE_NAME_SQL, newCountryCodeName, codename));
 	}
 
 	@Override
@@ -50,7 +49,12 @@ public class JDBCCountryDao extends NamedParameterJdbcDaoSupport implements Coun
 		}
 	}
 
-	@Override
+    @Override
+    public void deleteCountryByName(String name) {
+	    getJdbcTemplate().execute(String.format(DELETE_COUNTRY_BY_NAME_SQL, name));
+    }
+
+    @Override
     public Country getCountryByCodeName(String codeName) {
         JdbcTemplate jdbcTemplate = getJdbcTemplate();
         String sql = String.format(GET_COUNTRY_BY_CODE_NAME_SQL, codeName);
