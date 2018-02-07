@@ -4,7 +4,7 @@ import org.springframework.stereotype.Component;
 import spring.aop.AopLog;
 import spring.model.ioc.Person;
 
-@Component("bar")
+@Component
 public class ApuBar implements Bar {
 
     @Override

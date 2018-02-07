@@ -15,10 +15,9 @@ import spring.model.ioc.Person;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.springframework.test.util.AssertionErrors.assertTrue;
-import static spring.Tests.fromSystemOut;
 
 @ExtendWith(SpringExtension.class)
-@ContextConfiguration("classpath:application-context.xml")
+@ContextConfiguration("classpath:aop.xml")
 public class AopAspectJTest {
 
     @Autowired

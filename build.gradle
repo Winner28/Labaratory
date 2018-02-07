@@ -44,6 +44,7 @@ dependencies {
             'org.springframework:spring-jdbc:+',
             'com.mchange:c3p0:+',
 
+
             // ORM
             'org.springframework:spring-orm:+',
             'org.hibernate:hibernate-spatial:+',
