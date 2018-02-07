@@ -10,6 +10,7 @@
     <context:component-scan base-package="spring"/>
 
     <bean id="country" class="spring.model.ioc.SimpleCountry">
+        <constructor-arg name="id" value="1"/>
         <constructor-arg name="name" value="Belarus"/>
         <constructor-arg name="codeName" value="BY"/>
     </bean>

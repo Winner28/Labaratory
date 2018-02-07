@@ -52,7 +52,8 @@ public class Test_Task {
     }
 
     private Country getExpectedCountry() {
-        return new SimpleCountry("Belarus",
+        return new SimpleCountry(1,
+                "Belarus",
                 "BY");
     }
 
