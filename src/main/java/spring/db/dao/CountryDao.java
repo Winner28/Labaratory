@@ -6,28 +6,26 @@ import java.util.List;
 
 public interface CountryDao {
 
-     static final String LOAD_COUNTRIES_SQL = "insert into country (name, code_name) values ";
+       String LOAD_COUNTRIES_SQL = "INSERT INTO country (name, code_name) VALUES ('%s', '%s')";
+       String GET_ALL_COUNTRIES_SQL = "SELECT id, name, code_name FROM country";
+       String GET_COUNTRIES_BY_NAME_SQL = "SELECT id, name, code_name FROM country WHERE name LIKE :name";
+       String GET_COUNTRY_BY_NAME_SQL = "SELECT id, name, code_name FROM country WHERE name = '%s'";
+       String GET_COUNTRY_BY_CODE_NAME_SQL = "SELECT id, name, code_name FROM country WHERE code_name = '%s'";
+       String UPDATE_COUNTRY_NAME_SQL = "UPDATE country SET name='%s' WHERE code_name='%s'";
 
-     static final String GET_ALL_COUNTRIES_SQL = "select * from country";
-     static final String GET_COUNTRIES_BY_NAME_SQL = "select * from country where name like :name";
-     static final String GET_COUNTRY_BY_NAME_SQL = "select * from country where name = '";
-     static final String GET_COUNTRY_BY_CODE_NAME_SQL = "select * from country where code_name = '";
-
-     static final String UPDATE_COUNTRY_NAME_SQL_1 = "update country SET name='";
-     static final String UPDATE_COUNTRY_NAME_SQL_2 = " where code_name='";
-
-     static String[][] COUNTRY_INIT_DATA = {
-            { "Australia", "AU" },
-            { "Canada", "CA" },
-            { "France", "FR" },
-            { "Hong Kong", "HK" },
-            { "Iceland", "IC" },
-            { "Japan", "JP" }, { "Nepal", "NP" },
-            { "Russian Federation", "RU" },
-            { "Sweden", "SE" },
-            { "Switzerland", "CH" },
-            { "United Kingdom", "GB" },
-            { "United States", "US" }
+      String[][] COUNTRY_INIT_DATA = {
+              { "Australia", "AU" },
+              { "Canada", "CA" },
+              { "France", "FR" },
+              { "Hong Kong", "HK" },
+              { "Iceland", "IC" },
+              { "Japan", "JP" },
+              { "Nepal", "NP" },
+              { "Russian Federation", "RU" },
+              { "Sweden", "SE" },
+              { "Switzerland", "CH" },
+              { "United Kingdom", "GB" },
+              { "United States", "US" }
     };
 
      List<Country> getCountryList();

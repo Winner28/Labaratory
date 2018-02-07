@@ -37,7 +37,8 @@ public class JDBCCountryDao extends NamedParameterJdbcDaoSupport implements Coun
 
 	@Override
 	public void updateCountryName(String codename, String newCountryCodeName) {
-
+	    getJdbcTemplate().execute(
+	            String.format(UPDATE_COUNTRY_NAME_SQL, newCountryCodeName, codename));
 	}
 
 	@Override
