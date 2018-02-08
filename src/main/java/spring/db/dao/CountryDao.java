@@ -13,12 +13,12 @@ public interface CountryDao {
        String GET_COUNTRY_BY_NAME_SQL = "SELECT id, name, code_name FROM country WHERE name = '%s'";
        String GET_COUNTRY_BY_CODE_NAME_SQL = "SELECT id, name, code_name FROM country WHERE code_name = '%s'";
 
-       String UPDATE_COUNTRY_NAME_SQL = "UPDATE country SET name='%s' WHERE code_name='%s'";
+       String UPDATE_COUNTRY_NAME_SQL = "UPDATE country SET name='%s' WHERE name='%s'";
        String UPDATE_COUNTRY_CODE_NAME_SQL = "UPDATE country SET code_name='%s' WHERE code_name='%s'";
 
        String DELETE_COUNTRY_BY_NAME_SQL = "DELETE FROM Country WHERE name='%s'";
 
-    String[][] COUNTRY_INIT_DATA = {
+       String[][] COUNTRY_INIT_DATA = {
               { "Australia", "AU" },
               { "Canada", "CA" },
               { "France", "FR" },
@@ -37,6 +37,7 @@ public interface CountryDao {
      List<Country> getCountryListStartWith(String name);
 
      void updateCountryCodeName(String codename, String newCountryCodeName);
+     void updateCountryName(String oldName, String newCountryName);
      void loadCountries();
      void deleteCountryByName(String name);
 

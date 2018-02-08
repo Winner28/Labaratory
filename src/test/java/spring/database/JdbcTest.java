@@ -37,11 +37,11 @@ public class JdbcTest {
     private static final String COUNTRY_CODE_NAME = "AU";
     private static final String NEW_COUNTRY_CODE_NAME = "AUS";
     private static final String SECOND_COUNTRY_NAME = "Argentine";
+    private static final String SECOND_COUNTRY_CODE_NAME = "AR";
     private static final String BEST_COUNTRY_NAME = "Belarus";
     private static final String BEST_COUNTRY_CODE_NAME = "BY";
+    private static final String COUNTRY_NAME_FOR_UPDATE = "Armenia";
 
-
-    private Country countryWithChangedName = new SimpleCountry(8, "Russia", "RU");
 
     @BeforeEach
     private void setUp() {
@@ -70,11 +70,22 @@ public class JdbcTest {
 
     @Test
     @DirtiesContext
-    void testThatWeCanUpdateCountryName() {
+    void testThatWeCanUpdateCountryCodeName() {
         Country beforeUpdate = countryDao.getCountryByName(COUNTRY_NAME);
         countryDao.updateCountryCodeName(COUNTRY_CODE_NAME, NEW_COUNTRY_CODE_NAME);
         Country afterUpdate = countryDao.getCountryByName(COUNTRY_NAME);
         assertNotEquals(beforeUpdate, afterUpdate);
+    }
+
+    @Test
+    @DirtiesContext
+    void testThatWeCanUpdateCountryName() {
+        Country beforeUpdate = countryDao.getCountryByCodeName(SECOND_COUNTRY_CODE_NAME);
+        countryDao.updateCountryName(SECOND_COUNTRY_NAME, COUNTRY_NAME_FOR_UPDATE);
+        Country afterUpdate = countryDao.getCountryByCodeName(SECOND_COUNTRY_CODE_NAME);
+        assertNotEquals(beforeUpdate, afterUpdate);
+        String newCountryName = afterUpdate.getName();
+        assertEquals(newCountryName, COUNTRY_NAME_FOR_UPDATE);
     }
 
     @Test

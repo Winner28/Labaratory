@@ -41,6 +41,13 @@ public class JDBCCountryDao extends NamedParameterJdbcDaoSupport implements Coun
 	}
 
 	@Override
+	public void updateCountryName(String oldName, String newCountryName) {
+		getJdbcTemplate().execute(
+				String.format(UPDATE_COUNTRY_NAME_SQL, newCountryName, oldName)
+		);
+	}
+
+	@Override
 	public void loadCountries() {
 		for (String [] countryData : COUNTRY_INIT_DATA) {
 			getJdbcTemplate().execute(
