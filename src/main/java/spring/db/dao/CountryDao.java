@@ -43,4 +43,5 @@ public interface CountryDao {
 
      Country getCountryByCodeName(String codeName);
      Country getCountryByName(String name);
+     void save(Country country);
 }

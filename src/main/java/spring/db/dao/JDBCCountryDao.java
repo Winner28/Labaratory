@@ -80,4 +80,9 @@ public class JDBCCountryDao extends NamedParameterJdbcDaoSupport implements Coun
         }
         return countryList.get(0);
     }
+
+	@Override
+	public void save(Country country) {
+
+	}
 }
