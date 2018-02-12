@@ -7,7 +7,7 @@ import spring.model.ioc.Country;
 import javax.persistence.EntityManager;
 import java.util.List;
 
-@Repository("countryDao")
+@Repository("countryJpaDao")
 public class CountryJpaDaoImpl extends AbstractJpaDao implements CountryDao {
 
     public Country save(Country country) {
