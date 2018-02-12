@@ -22,7 +22,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 @ExtendWith(SpringExtension.class)
 @ContextConfiguration("classpath:ioc.xml")
 @AllArgsConstructor(onConstructor = @__(@Autowired))
-public class Test_Task {
+class Test_Task {
     Person person;
     Country country;
     Contact contact;
@@ -52,7 +52,7 @@ public class Test_Task {
     }
 
     private Country getExpectedCountry() {
-        return new SimpleCountry(1,
+        return new SimpleCountry(1L,
                 "Belarus",
                 "BY");
     }

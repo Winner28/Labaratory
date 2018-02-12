@@ -8,7 +8,7 @@
             Persistence unit for the Spring JPA tutorial with Hibernate using as JPA provider
         </description>
 
-         <class>spring.model.ioc.Country</class>
+         <class>spring.model.ioc.SimpleCountry</class>
         
         <properties>
             <property name="hibernate.show_sql" value="true" />

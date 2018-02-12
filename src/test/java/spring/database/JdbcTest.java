@@ -109,7 +109,7 @@ public class JdbcTest {
     }
 
     private Country getCountry() {
-        return new SimpleCountry(2,
+        return new SimpleCountry(2L,
                 BEST_COUNTRY_NAME,
                 BEST_COUNTRY_CODE_NAME);
     }

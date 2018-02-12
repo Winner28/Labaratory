@@ -12,7 +12,7 @@ import spring.model.ioc.SimpleCountry;
 
 @ExtendWith(SpringExtension.class)
 @ContextConfiguration("classpath:orm.xml")
-public class CountryJpaDaoImplTest {
+class CountryJpaDaoImplTest {
 
     @Autowired
     private CountryDao countryJpaDao;
@@ -23,7 +23,7 @@ public class CountryJpaDaoImplTest {
     }
 
     private Country getSimpleCountry() {
-        return new SimpleCountry(1,
+        return new SimpleCountry(1L,
                 "Russia",
                 "RU");
     }

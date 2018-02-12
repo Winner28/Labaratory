@@ -19,7 +19,7 @@ public class JDBCCountryDao extends NamedParameterJdbcDaoSupport implements Coun
 
 	private static final RowMapper<Country> COUNTRY_ROW_MAPPER = (resultSet, i) ->
 		new SimpleCountry(
-				resultSet.getInt("id"),
+				resultSet.getLong("id"),
 				resultSet.getString("name"),
 				resultSet.getString("code_name"));
 
