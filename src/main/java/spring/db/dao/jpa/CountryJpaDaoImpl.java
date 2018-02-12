@@ -10,13 +10,14 @@ import java.util.List;
 @Repository
 public class CountryJpaDaoImpl extends AbstractJpaDao implements CountryDao {
 
-    public void save(Country country) {
+    public Country save(Country country) {
         EntityManager em = emf.createEntityManager();
         if (em == null) {
             emf.close();
             throw new RuntimeException("Smth went wrong");
         }
         em.persist(country);
+        return null;
     }
 
 

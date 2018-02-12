@@ -41,6 +41,8 @@ public class JdbcTest {
     private static final String BEST_COUNTRY_NAME = "Belarus";
     private static final String BEST_COUNTRY_CODE_NAME = "BY";
     private static final String COUNTRY_NAME_FOR_UPDATE = "Armenia";
+    private static final String COUNTRY_FOR_SAVE_NAME = "Belgia";
+    private static final String COUNTRY_FOR_SAVE_CODE_NAME = "BLG";
 
 
     @BeforeEach
@@ -104,6 +106,16 @@ public class JdbcTest {
         assertThrows(CountryNotFoundException.class, () -> countryDao.getCountryByName(SECOND_COUNTRY_NAME));
     }
 
+    @Test
+    @DirtiesContext
+    void testThatWeCatnSaveCountry() {
+        SimpleCountry countryForSave = getCountryForSave();
+        int countrySize = expectedCountryList.size();
+        countryDao.save(countryForSave);
+        countryForSave.setId((long) countrySize + 1);
+        assertEquals(countryDao.getCountryByName(COUNTRY_FOR_SAVE_NAME), countryForSave);
+    }
+
     private void initExpectedCountryList() {
         expectedCountryList = countryDao.getCountryList();
     }
@@ -112,5 +124,12 @@ public class JdbcTest {
         return new SimpleCountry(2L,
                 BEST_COUNTRY_NAME,
                 BEST_COUNTRY_CODE_NAME);
+    }
+
+    private SimpleCountry getCountryForSave() {
+        SimpleCountry country = new SimpleCountry();
+        country.setName(COUNTRY_FOR_SAVE_NAME);
+        country.setCodeName(COUNTRY_FOR_SAVE_CODE_NAME);
+        return country;
     }
 }
