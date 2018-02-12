@@ -15,8 +15,6 @@ public class CountryJpaDaoImpl extends AbstractJpaDao implements CountryDao {
             entityManager.merge(country));
     }
 
-
-
     @Override
     public List<Country> getCountryList() {
         return mapEntityManager(entityManager -> entityManager.createQuery(
@@ -26,22 +24,35 @@ public class CountryJpaDaoImpl extends AbstractJpaDao implements CountryDao {
 
     @Override
     public List<Country> getCountryListStartWith(String name) {
+        //TODO
+        // not needed
         return null;
     }
 
     @Override
     public void updateCountryCodeName(String codename, String newCountryCodeName) {
-
+        withEntityManagerInTransaction(entityManager ->
+                entityManager.createQuery(
+                        "update SimpleCountry set codeName = :newCodeName " +
+                                "where codeName = :oldCodeName")
+                        .setParameter("newCodeName", newCountryCodeName)
+                        .setParameter("oldCodeName", codename));
     }
 
     @Override
     public void updateCountryName(String oldName, String newCountryName) {
-
+         withEntityManagerInTransaction(entityManager ->
+            entityManager.createQuery(
+                    "update SimpleCountry set name = :newName " +
+                            "where name = :oldName")
+                    .setParameter("newName", newCountryName)
+                    .setParameter("oldName", oldName));
     }
 
     @Override
     public void loadCountries() {
-
+        //TODO
+        // not needed
     }
 
     @Override
@@ -51,11 +62,21 @@ public class CountryJpaDaoImpl extends AbstractJpaDao implements CountryDao {
 
     @Override
     public Country getCountryByCodeName(String codeName) {
-        return null;
+        return mapEntityManager(entityManager ->
+                entityManager.createQuery(
+                        "select c from SimpleCountry c where c.codeName like :codeName",
+                        Country.class)
+                        .setParameter("codeName", codeName)
+                        .getSingleResult());
     }
 
     @Override
     public Country getCountryByName(String name) {
-        return null;
+        return mapEntityManager(entityManager ->
+            entityManager.createQuery(
+                    "select c from SimpleCountry c where c.name like :name",
+                    Country.class)
+                    .setParameter("name", name)
+                    .getSingleResult());
     }
 }

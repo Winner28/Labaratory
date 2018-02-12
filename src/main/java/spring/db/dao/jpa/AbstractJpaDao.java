@@ -6,7 +6,9 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 import javax.persistence.PersistenceUnit;
+import java.util.function.Consumer;
 import java.util.function.Function;
+import java.util.function.Supplier;
 
 public abstract class AbstractJpaDao {
 
@@ -25,6 +27,20 @@ public abstract class AbstractJpaDao {
             T result = entityManagerMapper.apply(entityManager);
             entityTransaction.commit();
             return result;
+        });
+    }
+
+    protected void withEntityManager(Consumer<EntityManager> entityManagerConsumer) {
+        EntityManager entityManager = emf.createEntityManager();
+        entityManagerConsumer.accept(entityManager);
+    }
+
+    protected void withEntityManagerInTransaction(Consumer<EntityManager> entityManagerConsumer) {
+        withEntityManager(entityManager -> {
+            EntityTransaction entityTransaction = entityManager.getTransaction();
+            entityTransaction.begin();
+            entityManagerConsumer.accept(entityManager);
+            entityTransaction.commit();
         });
     }
 

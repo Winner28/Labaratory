@@ -1,6 +1,6 @@
 SET MODE POSTGRESQL;
 
-CREATE TABLE IF NOT EXISTS country (
+CREATE TABLE IF NOT EXISTS Country (
   id        IDENTITY,
   name      VARCHAR(255),
   code_name VARCHAR(255)
