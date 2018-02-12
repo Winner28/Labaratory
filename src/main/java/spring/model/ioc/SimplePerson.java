@@ -6,7 +6,6 @@ import org.springframework.stereotype.Component;
 import java.util.List;
 
 @Value
-@Component("person")
 public class SimplePerson implements Person {
     private String firstName;
     private String lastName;

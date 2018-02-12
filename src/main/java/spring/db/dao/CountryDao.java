@@ -18,6 +18,8 @@ public interface CountryDao {
 
        String DELETE_COUNTRY_BY_NAME_SQL = "DELETE FROM Country WHERE name='%s'";
 
+       String SAVE_COUNTRY_SQL = "INSERT INTO Country (name, code_name) VALUES (?, ?)";
+
        String[][] COUNTRY_INIT_DATA = {
               { "Australia", "AU" },
               { "Canada", "CA" },
@@ -43,5 +45,5 @@ public interface CountryDao {
 
      Country getCountryByCodeName(String codeName);
      Country getCountryByName(String name);
-     void save(Country country);
+     Country save(Country country);
 }

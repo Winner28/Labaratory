@@ -1,5 +1,7 @@
 package spring.db.dao;
 
+import java.sql.PreparedStatement;
+import java.sql.Statement;
 import java.util.List;
 import java.util.Map;
 
@@ -11,6 +13,8 @@ import org.springframework.jdbc.core.namedparam.NamedParameterJdbcDaoSupport;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.jdbc.core.namedparam.SqlParameterSource;
 import org.springframework.jdbc.core.support.JdbcDaoSupport;
+import org.springframework.jdbc.support.GeneratedKeyHolder;
+import org.springframework.jdbc.support.KeyHolder;
 import spring.model.ioc.Country;
 import spring.model.ioc.SimpleCountry;
 
@@ -82,7 +86,22 @@ public class JDBCCountryDao extends NamedParameterJdbcDaoSupport implements Coun
     }
 
 	@Override
-	public void save(Country country) {
+	public Country save(Country country) {
+		assert country.getId() == null;
+		return country.withId(save(country.getName(), country.getCodeName()));
+	}
 
+	private long save(String name, String codeName) {
+		KeyHolder keyHolder = new GeneratedKeyHolder();
+		getJdbcTemplate().update(
+				con -> {
+					PreparedStatement preparedStatement = con.prepareStatement(
+							SAVE_COUNTRY_SQL, Statement.RETURN_GENERATED_KEYS);
+					preparedStatement.setString(1, name);
+					preparedStatement.setString(2, codeName);
+					return preparedStatement;
+				},
+				keyHolder);
+		return keyHolder.getKey().intValue();
 	}
 }
