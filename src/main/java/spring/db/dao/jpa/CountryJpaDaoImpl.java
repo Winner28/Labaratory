@@ -7,24 +7,21 @@ import spring.model.ioc.Country;
 import javax.persistence.EntityManager;
 import java.util.List;
 
-@Repository
+@Repository("countryDao")
 public class CountryJpaDaoImpl extends AbstractJpaDao implements CountryDao {
 
     public Country save(Country country) {
-        EntityManager em = emf.createEntityManager();
-        if (em == null) {
-            emf.close();
-            throw new RuntimeException("Smth went wrong");
-        }
-        em.persist(country);
-        return null;
+        return mapEntityManagerInTransaction(entityManager ->
+            entityManager.merge(country));
     }
 
 
 
     @Override
     public List<Country> getCountryList() {
-        return null;
+        return mapEntityManager(entityManager -> entityManager.createQuery(
+                "select c from SimpleCountry c", Country.class)
+                .getResultList());
     }
 
     @Override
