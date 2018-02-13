@@ -41,12 +41,16 @@ public class CountryJpaDaoImpl extends AbstractJpaDao implements CountryDao {
 
     @Override
     public void updateCountryName(String oldName, String newCountryName) {
-         withEntityManagerInTransaction(entityManager ->
+         withEntityManagerInTransaction(entityManager -> {
             entityManager.createQuery(
                     "update SimpleCountry set name = :newName " +
                             "where name = :oldName")
                     .setParameter("newName", newCountryName)
-                    .setParameter("oldName", oldName));
+                    .setParameter("oldName", oldName);
+            entityManager.flush();
+         });
+
+
     }
 
     @Override
@@ -57,7 +61,11 @@ public class CountryJpaDaoImpl extends AbstractJpaDao implements CountryDao {
 
     @Override
     public void deleteCountryByName(String name) {
-
+        withEntityManagerInTransaction(entityManager -> {
+            entityManager.createQuery("delete from SimpleCountry where name = :name")
+                    .setParameter("name", name);
+            entityManager.flush();
+        });
     }
 
     @Override
