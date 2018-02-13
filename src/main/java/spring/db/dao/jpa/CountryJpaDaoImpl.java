@@ -49,8 +49,6 @@ public class CountryJpaDaoImpl extends AbstractJpaDao implements CountryDao {
                     .setParameter("oldName", oldName);
             entityManager.flush();
          });
-
-
     }
 
     @Override

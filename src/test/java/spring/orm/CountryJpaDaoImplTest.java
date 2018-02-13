@@ -72,6 +72,14 @@ class CountryJpaDaoImplTest {
         assertEquals(getBestCountryInDaUniverse(), countryJpaDao.getCountryList().get(0));
     }
 
+    @Test
+    @DirtiesContext
+    void testThatWeCanDeleteCountryByName() {
+        countryJpaDao.save(getCountryForSave());
+        assertThat(countryJpaDao.getCountryList().size(), greaterThan(0));
+        countryJpaDao.deleteCountryByName(COUNTRY_NAME_FOR_SAVE);
+        assertThat(countryJpaDao.getCountryList().size(), is(0));
+    }
 
     private Country getCountryForSave() {
         return new SimpleCountry(1L,
