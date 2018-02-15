@@ -13,6 +13,7 @@ import spring.model.ioc.Country;
 
 //@Repository is more convenient declaration for such a class than general @Service
 @Repository
+@Transactional
 public class CountryServiceImpl implements CountryService {
 
 	
@@ -37,6 +38,7 @@ public class CountryServiceImpl implements CountryService {
 		}
 	}
 
+	@Transactional(readOnly = false, propagation = Propagation.REQUIRED)
 	public List<Country> getAllCountriesRequired() {
 		return countryDao.getCountryList();
 	}
