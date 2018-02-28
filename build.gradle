@@ -6,7 +6,9 @@ apply plugin: 'java'
 sourceCompatibility = 1.8
 
 repositories {
+    mavenLocal()
     mavenCentral()
+
 }
 
 buildscript {
@@ -18,6 +20,7 @@ buildscript {
     }
 }
 
+
 apply plugin: 'org.junit.platform.gradle.plugin'
 
 junitPlatform {
@@ -27,6 +30,16 @@ junitPlatform {
 configurations {
     testCompile.extendsFrom compileOnly
 }
+
+apply plugin: "war"
+apply from: 'https://raw.github.com/akhikhl/gretty/master/pluginScripts/gretty.plugin'
+dependencies {
+    compile "javax.servlet:servlet-api:2.5"
+}
+gretty {
+    httpPort = 8080
+}
+
 
 dependencies {
     compile 'org.apache.logging.log4j:log4j-jul:+',
@@ -67,6 +80,11 @@ dependencies {
             'org.springframework:spring-test:+',
             'org.mockito:mockito-core:+'
 }
+
+
+
+
+
 
 // type in terminal: gradle wrapper --gradle-version=4.5-rc-1
 task Wrapper(type: Wrapper) {
