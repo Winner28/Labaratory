@@ -64,11 +64,6 @@ dependencies {
             'com.mchange:c3p0:+',
 
 
-            // MVC
-            'org.springframework:spring-webmvc:+',
-            'javax.servlet.jsp.jstl:javax.servlet.jsp.jstl-api:+',
-            'org.glassfish.web:javax.servlet.jsp.jstl:+',
-
             // ORM
             'org.springframework:spring-orm:+',
             'org.hibernate:hibernate-spatial:+',
@@ -76,7 +71,14 @@ dependencies {
             'org.hibernate:hibernate-java8:+',
             'org.hibernate.javax.persistence:hibernate-jpa-2.1-api:+'
 
-    'io.vavr:vavr:+'
+            'io.vavr:vavr:+'
+
+
+    compile 'org.springframework:spring-webmvc:' +springVersion
+    compile 'javax.servlet:jstl:' + jstlVersion
+    compile 'org.springframework:spring-test:' + springVersion
+
+    providedCompile 'javax.servlet:javax.servlet-api:' + servletApiVersion
 
     // H2
     testRuntime 'com.h2database:h2:+'
