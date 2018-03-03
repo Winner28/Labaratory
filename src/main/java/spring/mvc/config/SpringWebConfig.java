@@ -1,3 +1,4 @@
+/*
 package spring.mvc.config;
 
 import org.springframework.context.annotation.Bean;
@@ -65,3 +66,4 @@ public class SpringWebConfig extends WebMvcConfigurationSupport {
 
 
 }
+*/

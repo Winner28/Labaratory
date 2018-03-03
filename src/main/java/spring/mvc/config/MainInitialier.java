@@ -1,3 +1,4 @@
+/*
 package spring.mvc.config;
 
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
@@ -18,3 +19,4 @@ public class MainInitialier extends AbstractAnnotationConfigDispatcherServletIni
         return new String[] { "/" };
     }
 }
+*/
