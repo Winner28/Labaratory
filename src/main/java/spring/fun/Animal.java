@@ -14,7 +14,7 @@ public class Animal {
 
     public void setName(String name) {
         this.name = name;
-    }
+     }
 
     class TypoWord {
 
@@ -27,6 +27,10 @@ public class Animal {
 
         public void sayValueAndName() {
             System.out.println(this.value + "and name " + Animal.this.getName());
+        }
+
+        protected void h() {
+            System.out.println("h1");
         }
     }
 
