@@ -8,6 +8,7 @@ import spring.model.ioc.SimplePerson;
 import spring.fun.Animal.TypoWord;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 public class Maiin {
@@ -16,7 +17,7 @@ public class Maiin {
         TypoWord typoWord = animal.new TypoWord(3,"a");
         typoWord.sayValueAndName();
         Animal.TypoStatic typoStatic = new Animal.TypoStatic(123);
-        List<Animal> animals = new ArrayList<>();
+        List<Animal> animals = new LinkedList<>();
     }
 
     private static void proceedAnimal(Animal animal) {

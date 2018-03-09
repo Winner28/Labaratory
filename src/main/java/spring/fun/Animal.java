@@ -20,7 +20,7 @@ public class Animal {
 
         private int value;
 
-        public TypoWord(int value, String newName) {
+         TypoWord(int value, String newName) {
             this.value = value;
             Animal.this.setName(newName);
         }
