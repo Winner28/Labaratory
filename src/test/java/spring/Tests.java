@@ -2,6 +2,13 @@ package spring;
 
 import lombok.SneakyThrows;
 import lombok.val;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
+import spring.model.ioc.Person;
 import spring.model.ioc.SimplePerson;
 
 import java.io.ByteArrayOutputStream;
@@ -12,10 +19,10 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+
 public class Tests {
 
     String APPLICATION_CONTEXT_XML_FILE_NAME = "ioc.xml";
-
 
     @SneakyThrows
     public static String fromSystemOut(Runnable runnable) {

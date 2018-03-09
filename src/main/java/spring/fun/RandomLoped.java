@@ -1,11 +1,15 @@
 package spring.fun;
 
-public class RandomLoped implements Loped{
+public class RandomLoped {
 
     @InjectRandomInt(min = 2, max = 7)
     private int random;
 
     private String message;
+
+    private void init() {
+        System.out.println("init");
+    }
 
     public void setMessage(String message) {
         this.message = message;
@@ -15,7 +19,7 @@ public class RandomLoped implements Loped{
         return message;
     }
 
-    @Override
+
     public void lope() {
         for (int i = 0; i<random; i++) {
             System.out.println(message);

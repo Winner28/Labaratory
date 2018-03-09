@@ -1,5 +1,6 @@
 package spring.model.ioc;
 
+import lombok.NoArgsConstructor;
 import lombok.Value;
 import org.springframework.stereotype.Component;
 
