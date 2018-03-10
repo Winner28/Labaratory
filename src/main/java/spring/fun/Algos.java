@@ -6,6 +6,25 @@ public class Algos {
         int [] arr = {55555,6,2,1,100,150,99,0,3,7,8700};
         selectionSort(arr);
         print(arr);
+        binarySearch(arr,992);
+    }
+
+    private static void binarySearch(int[] arr, int value) {
+        int left = 0;
+        int right = arr.length - 1;
+        while (left <= right) {
+            int middle = left + (right - left)/2;
+            if (value > arr[middle]) {
+                left = middle + 1;
+            } else if (value < arr[middle]) {
+                right = middle - 1;
+            } else {
+                System.out.println("We got the value, its on position: " + middle);
+                return;
+            }
+        }
+        System.out.println("The value not exists!");
+
     }
 
     private static void print(int []arr) {
@@ -25,7 +44,8 @@ public class Algos {
     }
 
     private static void insertionSort(int []array) {
-
+        for (int i = 0; i < array.length; i++) {
+        }
     }
 
     private static void selectionSort(int []array) {
