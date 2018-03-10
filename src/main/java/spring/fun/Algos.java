@@ -4,7 +4,7 @@ public class Algos {
 
     public static void main(String[] args) {
         int [] arr = {55555,6,2,1,100,150,99,0,3,7,8700};
-        selectionSort(arr);
+        quickSort(arr);
         print(arr);
         binarySearch(arr,992);
     }
@@ -45,6 +45,13 @@ public class Algos {
 
     private static void insertionSort(int []array) {
         for (int i = 0; i < array.length; i++) {
+            int var = array[i];
+            int j = i - 1;
+            while (j>=0 && var < array[j]) {
+                array[j+1] = array[j];
+                j--;
+            }
+            array[j+1] = var;
         }
     }
 
@@ -72,6 +79,27 @@ public class Algos {
     }
 
     private static void quickSort(int []array) {
+        reallyQuick(array, 0, array.length - 1);
+    }
 
+    private static void reallyQuick(int []array, int left, int right) {
+        int l = left;
+        int r = right;
+        int pivot = (l + r)/2;
+
+        while (l <= r) {
+            while (array[l] < array[pivot]) l++;
+            while (array[r] > array[pivot]) r--;
+
+            if (l <= r) {
+                int temp = array[l];
+                array[l] = array[r];
+                array[r] = temp;
+                l++;
+                r--;
+            }
+        }
+        if (l < right) reallyQuick(array, l, right);
+        if (left < r) reallyQuick(array, left, r);
     }
 }
