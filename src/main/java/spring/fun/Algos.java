@@ -4,8 +4,8 @@ public class Algos {
 
     public static void main(String[] args) {
         int [] arr = {55555,6,2,1,100,150,99,0,3,7,8700};
-        //mergeSort(arr, 0, arr.length - 1);
-        insertionSort(arr);
+        mergeSort(arr, 0, arr.length - 1);
+        //insertionSort(arr);
         print(arr);
         binarySearch(arr,992);
     }
@@ -49,7 +49,7 @@ public class Algos {
             int var = array[i];
             int j = i - 1;
             while (j>=0 && var < array[j]) {
-                array[j+ 1] = array[j];
+                array[j+1] = array[j];
                 j--;
             }
             array[j+1] = var;
@@ -75,30 +75,24 @@ public class Algos {
     private static void mergeSort(int []array, int l, int r) {
         if (l >= r)
             return;
-        int middle = (l + r) / 2;
-        mergeSort(array, l, middle);
-        mergeSort(array, middle+1, r);
-        merge(array, l, middle, r);
-
+       int middle = (l+r)/2;
+       mergeSort(array, l, middle);
+       mergeSort(array, middle + 1, r);
+       merge(array, l, middle, r);
     }
 
     private static void merge(int[] array, int l, int middle, int r) {
         int n1 = middle - l + 1;
         int n2 = r - middle;
-
         int L[] = new int[n1];
         int R[] = new int[n2];
 
         System.arraycopy(array, l, L, 0, n1);
-
-        for (int j = 0; j<n2; j++) {
-            R[j] = array[j + middle + 1];
-        }
-
-        int i =0, j = 0;
+        for (int j = 0; j<n2; j++) R[j] = array[middle  + j + 1];
         int k = l;
-        while(i<n1 && j<n2) {
-            if (L[i]<= R[j]) {
+        int i = 0, j = 0;
+        while (i < n1 && j < n2) {
+            if (L[i] <= R[j]) {
                 array[k] = L[i];
                 i++;
             } else {
@@ -106,16 +100,19 @@ public class Algos {
                 j++;
             }
             k++;
+
         }
+
         while (i < n1) {
             array[k] = L[i];
             k++;
             i++;
         }
-        while (i < n2) {
+
+        while (j < n2) {
             array[k] = R[j];
-            j++;
             k++;
+            j++;
         }
     }
 
@@ -124,23 +121,23 @@ public class Algos {
     }
 
     private static void reallyQuick(int []array, int left, int right) {
-        int l = left;
-        int r = right;
-        int pivot = (l + r)/2;
-
-        while (l <= r) {
-            while (array[l] < array[pivot]) l++;
-            while (array[r] > array[pivot]) r--;
-
-            if (l <= r) {
-                int temp = array[l];
-                array[l] = array[r];
-                array[r] = temp;
-                l++;
-                r--;
-            }
-        }
-        if (l < right) reallyQuick(array, l, right);
-        if (left < r) reallyQuick(array, left, r);
+      int l = left;
+      int r = right;
+      int middle = left + (right - left)/2;
+      while (l <= r) {
+          while (array[l] < array[middle]) l++;
+          while (array[r] > array[middle]) r--;
+          if (l <= r) {
+              int temp = array[l];
+              array[l] = array[r];
+              array[r] = temp;
+              r--;
+              l++;
+          }
+      }
+      if (l < right) reallyQuick(array, l, right);
+      if (left < r) reallyQuick(array, left, r);
     }
 }
+
+
