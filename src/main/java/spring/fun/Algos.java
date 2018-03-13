@@ -5,10 +5,11 @@ public class Algos {
     public static void main(String[] args) {
         int [] arr = {55555,6,2,1,100,150,99,0,3,7,8700};
         mergeSort(arr, 0, arr.length - 1);
-        //insertionSort(arr);
-        /*print(arr);*/
-        //System.out.println(secondFib(45));
-      //System.out.println(fib(45));
+        insertionSort(arr);
+        print(arr);
+        System.out.println(secondFib(45));
+        assert factorial(5) == 1320;
+
     }
 
     private static void binarySearch(int[] arr, int value) {
@@ -158,6 +159,16 @@ public class Algos {
         }
 
         return next;
+    }
+
+    private static int factorial(int number) {
+        if (number == 0) return 1;
+        if (number < 2) return number;
+        int result = 1;
+        for (int i = 2; i <= number; i++) {
+            result *= i;
+        }
+        return result;
     }
 }
 
