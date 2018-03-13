@@ -4,10 +4,10 @@ public class Algos {
 
     public static void main(String[] args) {
         int [] arr = {55555,6,2,1,100,150,99,0,3,7,8700};
-        mergeSort(arr, 0, arr.length - 1);
+        //mergeSort(arr, 0, arr.length - 1);
         insertionSort(arr);
         print(arr);
-        System.out.println(secondFib(45));
+      //  System.out.println(secondFib(45));
         assert factorial(5) == 1320;
 
     }
@@ -50,27 +50,25 @@ public class Algos {
         for (int i = 0; i < array.length; i++) {
             int var = array[i];
             int j = i - 1;
-            while (j>=0 && var < array[j]) {
-                array[j+1] = array[j];
+            while (j>=0 && var > array[j]) {
+                array[j + 1] = array[j];
                 j--;
             }
-            array[j+1] = var;
+            if (j != i + 1)
+                array[j + 1] = var;
         }
     }
 
     private static void selectionSort(int []array) {
         for (int i = 0; i < array.length; i++) {
             int index = i;
-            int var = array[i];
             for (int j = i; j < array.length; j++) {
-                if (var < array[j]) {
+                if (array[j] > array[index])
                     index = j;
-                    var = array[j];
-                }
             }
-            int temp = array[i];
-            array[i] = array[index];
-            array[index] = temp;
+            int temp = array[index];
+            array[index] = array[i];
+            array[i] = temp;
         }
     }
 
