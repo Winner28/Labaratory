@@ -1,13 +1,16 @@
 package spring.fun;
 
+import java.util.Arrays;
+
 public class Algos {
 
     public static void main(String[] args) {
         int [] arr = {55555,6,2,1,100,150,99,0,3,7,8700};
         //mergeSort(arr, 0, arr.length - 1);
-        reallyQuick(arr, 0, arr.length - 1);
+        int []sir = secondChance(arr);
+        print(sir);
         //insertionSort(arr);
-        print(arr);
+      //  print(arr);
       //  System.out.println(secondFib(45));
         assert factorial(5) == 1320;
 
@@ -165,6 +168,30 @@ public class Algos {
         int result = 1;
         for (int i = 2; i <= number; i++) {
             result *= i;
+        }
+        return result;
+    }
+
+    private static int [] secondChance(int []array) {
+        if (array.length < 2) return array;
+        int [] farray = Arrays.copyOfRange(array, 0, array.length/2);
+        int [] sarray = Arrays.copyOfRange(array, array.length/2, array.length);
+        return secondMerge(secondChance(farray), secondChance(sarray));
+    }
+
+    private static int[] secondMerge(int[] fir, int[] sir) {
+        int [] result = new int[fir.length + sir.length];
+        int f = 0, s = 0;
+        for (int i = 0; i < result.length; i++) {
+            if (f == fir.length) {
+                result[i] = sir[s++];
+            } else if (s == sir.length) {
+                result[i] = fir[f++];
+            } else if (fir[f] < sir[s]) {
+                result[i] = fir[f++];
+            } else {
+                result[i] = sir[s++];
+            }
         }
         return result;
     }
