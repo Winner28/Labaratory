@@ -99,25 +99,19 @@ public class Algos {
         int k = l;
         while (i<n1 && j<n2) {
             if (L[i] <= R[j]) {
-                array[k] = L[i];
-                i++;
+                array[k] = L[i++];
             } else {
-                array[k] = R[j];
-                j++;
+                array[k] = R[j++];
             }
-            k++;
+            ++k;
         }
 
         while (i < n1) {
-            array[k] = L[i];
-            k++;
-            i++;
+            array[k++] = L[i++];
         }
 
         while (j < n2) {
-            array[k] = R[j];
-            k++;
-            j++;
+            array[k++] = R[j++];
         }
     }
 
