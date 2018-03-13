@@ -29,6 +29,9 @@ public class Maiin {
         set.add(null);
 
 
+
+
+
     }
 
     private static void proceedAnimal(Animal animal) {

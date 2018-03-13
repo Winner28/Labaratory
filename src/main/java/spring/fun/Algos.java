@@ -6,8 +6,9 @@ public class Algos {
         int [] arr = {55555,6,2,1,100,150,99,0,3,7,8700};
         mergeSort(arr, 0, arr.length - 1);
         //insertionSort(arr);
-        print(arr);
-        binarySearch(arr,992);
+        /*print(arr);*/
+        //System.out.println(secondFib(45));
+      //System.out.println(fib(45));
     }
 
     private static void binarySearch(int[] arr, int value) {
@@ -137,6 +138,26 @@ public class Algos {
       }
       if (l < right) reallyQuick(array, l, right);
       if (left < r) reallyQuick(array, left, r);
+    }
+
+    private static int fib(int n) {
+        if (n < 2)
+            return n;
+        return fib(n-1) + fib(n-2);
+    }
+
+    private static int secondFib(int n) {
+        if (n<2) {
+            return n;
+        }
+        int prev = 0;
+        int next = 1;
+        for (int i = 2; i<=n; i++) {
+            next += prev;
+            prev = next - prev;
+        }
+
+        return next;
     }
 }
 
