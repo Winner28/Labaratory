@@ -131,7 +131,7 @@ public class Algos {
 
           if (l <= r) {
               int temp = array[l];
-              array[l--] = array[r];
+              array[l++] = array[r];
               array[r--] = temp;
           }
       }
