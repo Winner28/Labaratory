@@ -5,7 +5,8 @@ public class Algos {
     public static void main(String[] args) {
         int [] arr = {55555,6,2,1,100,150,99,0,3,7,8700};
         //mergeSort(arr, 0, arr.length - 1);
-        insertionSort(arr);
+        reallyQuick(arr, 0, arr.length - 1);
+        //insertionSort(arr);
         print(arr);
       //  System.out.println(secondFib(45));
         assert factorial(5) == 1320;
@@ -123,20 +124,19 @@ public class Algos {
     private static void reallyQuick(int []array, int left, int right) {
       int l = left;
       int r = right;
-      int middle = left + (right - left)/2;
+      int pivot = l - (l - right)/2;
       while (l <= r) {
-          while (array[l] < array[middle]) l++;
-          while (array[r] > array[middle]) r--;
+          while (array[l] < array[pivot]) l++;
+          while (array[r] > array[pivot]) r--;
+
           if (l <= r) {
               int temp = array[l];
-              array[l] = array[r];
-              array[r] = temp;
-              r--;
-              l++;
+              array[l--] = array[r];
+              array[r--] = temp;
           }
       }
-      if (l < right) reallyQuick(array, l, right);
       if (left < r) reallyQuick(array, left, r);
+      if (right > l) reallyQuick(array, l, right);
     }
 
     private static int fib(int n) {
