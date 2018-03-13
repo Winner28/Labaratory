@@ -6,9 +6,8 @@ public class Algos {
 
     public static void main(String[] args) {
         int [] arr = {55555,6,2,1,100,150,99,0,3,7,8700};
-        //mergeSort(arr, 0, arr.length - 1);
-        int []sir = secondChance(arr);
-        print(sir);
+        mergeSort(arr, 0, arr.length - 1);
+        print(arr);
         //insertionSort(arr);
       //  print(arr);
       //  System.out.println(secondFib(45));
@@ -90,12 +89,15 @@ public class Algos {
         int n2 = r - middle;
         int L[] = new int[n1];
         int R[] = new int[n2];
-
-        System.arraycopy(array, l, L, 0, n1);
-        for (int j = 0; j<n2; j++) R[j] = array[middle  + j + 1];
-        int k = l;
+        for (int i = 0; i < n1; i++) {
+            L[i] = array[i + l];
+        }
+        for (int j = 0; j < n2; j++) {
+            R[j] = array[j + middle +1];
+        }
         int i = 0, j = 0;
-        while (i < n1 && j < n2) {
+        int k = l;
+        while (i<n1 && j<n2) {
             if (L[i] <= R[j]) {
                 array[k] = L[i];
                 i++;
@@ -104,7 +106,6 @@ public class Algos {
                 j++;
             }
             k++;
-
         }
 
         while (i < n1) {
@@ -119,6 +120,8 @@ public class Algos {
             j++;
         }
     }
+
+
 
     private static void quickSort(int []array) {
         reallyQuick(array, 0, array.length - 1);
