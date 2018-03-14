@@ -4,6 +4,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.Arrays;
+
 @AllArgsConstructor
 @Data
 public class Animal {
@@ -46,5 +48,29 @@ public class Animal {
         public void setA(int a) {
             this.a = a;
         }
+    }
+
+    public static void main(String[] args) {
+       int []input = {9, 4, 10, 8, 2, 4};
+       int max = 10;
+       int []count = new int[max + 1];
+       for (int i = 0; i < input.length; i++) {
+           count[input[i]]++;
+       }
+
+       for (int i = 1; i < count.length; i++) {
+           count[i] = count[i] + count[i - 1];
+       }
+
+       int result [] = new int[input.length];
+       for (int i = 0; i < input.length; i++) {
+           result[count[input[i]]--] = input[i];
+           //count[input[i]]--;
+       }
+
+       Algos.print(result);
+
+
+
     }
 }

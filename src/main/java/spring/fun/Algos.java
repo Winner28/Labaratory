@@ -1,6 +1,7 @@
 package spring.fun;
 
 import java.util.Arrays;
+import java.util.Random;
 
 public class Algos {
 
@@ -12,6 +13,12 @@ public class Algos {
       //  print(arr);
       //  System.out.println(secondFib(45));
         assert factorial(5) == 1320;
+
+        int[] twentyMillion = new int [10000000];
+        for (int i = 0; i < twentyMillion.length; i++) {
+            twentyMillion [i] = new Random().nextInt(10000000);
+        }
+        sortByAccendPro(twentyMillion , 10000000);
 
     }
 
@@ -33,7 +40,7 @@ public class Algos {
 
     }
 
-    private static void print(int []arr) {
+    public static void print(int []arr) {
         for (int i : arr)
             System.out.print(i + " , ");
     }
@@ -191,6 +198,54 @@ public class Algos {
             }
         }
         return result;
+    }
+
+
+    /**
+     *
+     * @param {int[]} twentyMillion - array of twenty million random ints.
+     * @param {int} highestNumber - Highest number to sort to.
+     */
+    public static void sortByAccendPro(int[] twentyMillion, int highestNumber ) {
+        int[] rangePosition = new int[twentyMillion.length];
+        int[] newArray = new int[twentyMillion.length];
+        int[] range = new int[highestNumber];
+        long time = System.nanoTime();
+        for (int i = 0; i < twentyMillion.length; i++) {
+            rangePosition[i] = twentyMillion[i];
+            range[twentyMillion[i]]++;
+        }
+        for (int i = range.length - 1, past = twentyMillion.length; i >= 0; i--) {
+            range[i] = past - range[i];
+            past = range[i];
+        }
+        for (int i = 0; i < twentyMillion.length; i++) {
+            newArray[range[rangePosition[i]]] = twentyMillion[i];
+            range[rangePosition[i]]++;
+        }
+        System.out.println("time = " + (System.nanoTime() - time));
+    }
+
+    static void countSort(int []array, int high) {
+        int range[] = new int[high];
+        int count[] = new int[high];
+        int arr[] = new int[array.length];
+        for (int i = 0; i < array.length; i++) {
+            int counts = 0;
+            for (int j = i + 1; j < array.length - 1; j++) {
+                if (arr[i] == arr[j]) {
+                    counts++;
+                }
+                range[i] = counts;
+            }
+        }
+        if (array.length < high) {
+            for (int i = high - 1; i>=array.length; i--)
+                range[i] = 0;
+        }
+        for (int i = 1; i < array.length; i++) {
+            count[i] = range[i] + range[i-1];
+        }
     }
 }
 
