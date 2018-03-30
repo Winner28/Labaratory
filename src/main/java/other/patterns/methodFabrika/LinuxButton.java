@@ -9,6 +9,7 @@ public class LinuxButton implements Button {
 
     @Override
     public String action(String action) {
+        System.out.println("Linux: " + action);
         return "Linux: " + action;
     }
 }
