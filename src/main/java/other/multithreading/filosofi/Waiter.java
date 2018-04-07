@@ -21,6 +21,7 @@ public class Waiter {
         lao.inviteTo(table);
         kun.inviteTo(table);
         synchronized (table) {
+            started = true;
             table.notifyAll();
         }
         while (true) {
@@ -43,7 +44,8 @@ public class Waiter {
         philosopher.setBehaviour(() -> {
             try {
                 synchronized (table) {
-                    table.wait();
+                    while (!started)
+                      table.wait();
                 }
                 Stick leftStick = table.getStickWithLowerIndex(philosopher);
                 synchronized (leftStick) {
