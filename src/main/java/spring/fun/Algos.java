@@ -2,6 +2,8 @@ package spring.fun;
 
 import java.util.Arrays;
 import java.util.Random;
+import java.util.function.Consumer;
+import java.util.function.Supplier;
 
 public class Algos {
 
