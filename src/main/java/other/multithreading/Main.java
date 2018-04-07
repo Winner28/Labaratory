@@ -4,6 +4,7 @@ import java.util.concurrent.TimeUnit;
 
 public class Main {
     public static void main(String[] args) throws InterruptedException {
+        Thread main = Thread.currentThread();
         System.out.println("Main start");
         Thread thread = new Thread(() -> {
             try {
@@ -15,11 +16,8 @@ public class Main {
             }
         });
         thread.start();
-        synchronized (thread) {
-            thread.wait();
-        }
         thread.join();
         System.out.println("Main end");
     }
-    }
+}
 

@@ -14,13 +14,15 @@ public class Waiter {
 
         System.out.println("Philosophers can came and seat");
 
-        Philosopher mo = createPhilosopher("mo", waiter);
-        Philosopher kun = createPhilosopher("kun", waiter);
-        Philosopher lao = createPhilosopher("lao", waiter);
+        Philosopher mo = createPhilosopher("mo");
+        Philosopher kun = createPhilosopher("kun");
+        Philosopher lao = createPhilosopher("lao");
         mo.inviteTo(table);
         lao.inviteTo(table);
         kun.inviteTo(table);
-        started = true;
+        synchronized (table) {
+            table.notifyAll();
+        }
         while (true) {
             TimeUnit.SECONDS.sleep(5);
             System.out.println("Do you need something?");
@@ -36,11 +38,13 @@ public class Waiter {
         return thread.getState() == Thread.State.TERMINATED;
     }
 
-    public static Philosopher createPhilosopher(String name, Thread waiter) {
+    public static Philosopher createPhilosopher(String name) {
         Philosopher philosopher = new Philosopher(name);
         philosopher.setBehaviour(() -> {
             try {
-                while (!started) {}
+                synchronized (table) {
+                    table.wait();
+                }
                 Stick leftStick = table.getStickWithLowerIndex(philosopher);
                 synchronized (leftStick) {
                     TimeUnit.SECONDS.sleep(1);
