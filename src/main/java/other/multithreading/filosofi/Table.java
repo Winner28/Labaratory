@@ -36,7 +36,7 @@ public class Table {
     }
 
     public Stick getStickWithHigherIndex(Philosopher philosopher) {
-        int index = Math.min(philosopher.getSectionIndex() -1, (philosopher.getSectionIndex() + 1)% sectors.size());
+        int index = Math.max(philosopher.getSectionIndex() -1, (philosopher.getSectionIndex() + 1)% sectors.size());
         return (Stick) sectors.get(index).getValue();
     }
 

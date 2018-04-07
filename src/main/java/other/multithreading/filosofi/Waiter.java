@@ -24,8 +24,16 @@ public class Waiter {
         while (true) {
             TimeUnit.SECONDS.sleep(5);
             System.out.println("Do you need something?");
+            if (isTerminated(mo) && isTerminated(kun) && isTerminated(lao)) {
+                System.out.println("All philosophers are well-fed");
+                break;
+            }
         }
+        System.out.println("Restaraunt is closing!");
+    }
 
+    private static boolean isTerminated(Thread thread) {
+        return thread.getState() == Thread.State.TERMINATED;
     }
 
     public static Philosopher createPhilosopher(String name, Thread waiter) {
