@@ -1,26 +1,23 @@
 package spring.fun;
 
 import java.util.Arrays;
-import java.util.Random;
-import java.util.function.Consumer;
-import java.util.function.Supplier;
 
 public class Algos {
 
     public static void main(String[] args) {
         int [] arr = {55555,6,2,1,100,150,99,0,3,7,8700};
-        mergeSort(arr, 0, arr.length - 1);
+        Sort(arr, 0, arr.length - 1);
         print(arr);
         //insertionSort(arr);
       //  print(arr);
       //  System.out.println(secondFib(45));
-        assert factorial(5) == 1320;
+        /*assert factorial(5) == 1320;
 
         int[] twentyMillion = new int [10000000];
         for (int i = 0; i < twentyMillion.length; i++) {
             twentyMillion [i] = new Random().nextInt(10000000);
         }
-        sortByAccendPro(twentyMillion , 10000000);
+        sortByAccendPro(twentyMillion , 10000000);*/
 
     }
 
@@ -84,16 +81,17 @@ public class Algos {
         }
     }
 
-    private static void mergeSort(int []array, int l, int r) {
+    private static void Sort(int []array, int l, int r) {
         if (l >= r)
             return;
        int middle = (l+r)/2;
-       mergeSort(array, l, middle);
-       mergeSort(array, middle + 1, r);
-       merge(array, l, middle, r);
+       Sort(array, l, middle);
+       Sort(array, middle + 1, r);
+       Merge(array, l, middle, r);
     }
 
-    private static void merge(int[] array, int l, int middle, int r) {
+
+    private static void Merge(int[] array, int l, int middle, int r) {
         int n1 = middle - l + 1;
         int n2 = r - middle;
         int L[] = new int[n1];
