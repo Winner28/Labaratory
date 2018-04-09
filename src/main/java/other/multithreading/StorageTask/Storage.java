@@ -33,12 +33,18 @@ public class Storage {
     public String showMessage() {
         if (isMessageEmpty()) {
             try {
-                $readLock.wait();
+                System.out.println(Thread.currentThread()
+                                         .getName() + ": " + "Waiting for message");
+                synchronized ($readLock) {
+                    $readLock.wait();
+                }
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
+        } else {
+            System.out.println(Thread.currentThread()
+                                     .getName() + ": " + "Got it!!!");
         }
-
 
         synchronized ($writeLock) {
             try {
@@ -61,13 +67,14 @@ public class Storage {
         Reader reader2 = new Reader(storage, "Reader-2");
         Reader reader3 = new Reader(storage, "Reader-3");
 
-        writer.start();
-
-        Thread.sleep(3000);
         reader.start();
         reader1.start();
         reader2.start();
         reader3.start();
+        Thread.sleep(3000);
+        writer.start();
+
     }
+
 
 }
