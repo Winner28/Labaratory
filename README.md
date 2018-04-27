@@ -1,8 +1,21 @@
 # Everything in one place
-## december-17
 
-### tdd
-### spring
-### build tools
-### patterns
-### algos
+# ---------------------------------------------
+
+# december-17 - may-18
+
+
+
+## Spring
+### Spring MVC, Spring AOP, Spring DATA, Spring BOOT
+
+## ORM
+### Hibernate, JDBC
+
+## TDD
+
+## Build Tools
+
+## Patterns
+
+## Algos
